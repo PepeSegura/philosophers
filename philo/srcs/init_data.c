@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:07:10 by psegura-          #+#    #+#             */
-/*   Updated: 2023/02/18 06:41:45 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/02/18 07:03:59 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ int	philosophers(t_cosas *c)
 		c->philos[i].id = i + 1;
 		c->philos[i].l_fork = (i + 1 + 1) % c->philo_c;
 		c->philos[i].r_fork = i + 1;
-		c->philos[i].time_since_eat = 0;
-		c->philos[i].eat_count = 0;
-		c->philos[i].is_eating = 0;
 		c->philos[i].c = c;
 		gettimeofday(&c->philos[i].last_meal, NULL);
 		thread(c, i);

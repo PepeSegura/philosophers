@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:11:11 by psegura-          #+#    #+#             */
-/*   Updated: 2023/02/18 06:15:21 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/02/18 07:06:39 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,14 @@ int	main(int argc, char **argv)
 	{
 		if (init_args(&c) == 0)
 		{
-			mutex(&c);
-			philosophers(&c);
-			pthread_mutex_lock(&c.death);
+			if (c.philo_c != 1)
+			{
+				mutex(&c);
+				philosophers(&c);
+				pthread_mutex_lock(&c.death);
+			}
+			else
+				printf("0ms philo 1 died\n");
 		}
 		else
 			printf("Invalid Arguments\n");
@@ -34,10 +39,3 @@ int	main(int argc, char **argv)
 		printf(USAGE);
 	return (0);
 }
-
-			// printf("philo_c:	[%ld]\n", c.philo_c);
-			// printf("ttdie:		[%ld]\n", c.ttdie);
-			// printf("tteat:		[%ld]\n", c.tteat);
-			// printf("ttsleep:	[%ld]\n", c.ttsleep);
-			// printf("meals:		[%ld]\n", c.meals);
-			// printf("start_time:	[%ld]\n", c.program_start_time.tv_sec);
