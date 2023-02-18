@@ -6,20 +6,20 @@
 #    By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/05 12:09:16 by psegura-          #+#    #+#              #
-#    Updated: 2023/02/18 06:03:09 by psegura-         ###   ########.fr        #
+#    Updated: 2023/02/18 07:08:46 by psegura-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SRCS =							\
-		srcs/actions.c				\
-		srcs/init_data.c				\
-		srcs/main_loops.c		\
-		srcs/main.c				\
-		srcs/parser.c			\
+SRCS =						\
+		srcs/actions.c		\
+		srcs/init_data.c	\
+		srcs/main_loops.c	\
+		srcs/main.c			\
+		srcs/parser.c		\
 		srcs/timeval.c		\
-		srcs/utils.c			\
+		srcs/utils.c		\
 
 OBJS = $(SRCS:.c=.o)
 
