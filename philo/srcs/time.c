@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 12:11:11 by psegura-          #+#    #+#             */
-/*   Updated: 2023/05/30 18:56:16 by psegura-         ###   ########.fr       */
+/*   Created: 2023/05/30 13:07:02 by psegura-          #+#    #+#             */
+/*   Updated: 2023/05/30 18:36:19 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+long	get_time(void)
 {
-	t_cosas	c;
+	struct timeval	time;
 
-	memset(&c, 0, sizeof(t_cosas));
-	if (init_args(&c, argc, argv))
-	{
-		if (c.philo_c == 1)
-			print_one(c.ttdie);
-		else
-		{
-			init_mutex(&c);
-			init_philosophers(&c);
-			pthread_mutex_lock(&c.death);
-		}
-	}
-	else
-		printf(ARGS_KO);
-	return (0);
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
+long	ft_usleep(long wait)
+{
+	long	limit;
+
+	limit = get_time() + wait;
+	while (1)
+	{
+		if (get_time() >= limit)
+			break ;
+		usleep(200);
+	}
+	return (wait);
+}

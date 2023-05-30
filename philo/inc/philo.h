@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:18:26 by psegura-          #+#    #+#             */
-/*   Updated: 2023/02/18 06:13:48 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:06:35 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,27 @@
 # define PHILO_H
 
 /*__HEADER FILES__*/
+# include <unistd.h>
+# include <unistd.h>
+# include <pthread.h>
+# include <sys/time.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <limits.h>
 # include "philo.h"
-# include "libs.h"
 
-# define USAGE "USAGE:\n\t./philo n_philos ttdie tteat ttsleep [n_eats_each]\n"
+/*___TEXTS_TO_PRINT___*/
+# define USAGE 	"USAGE:\n\t./philo n_philos ttdie tteat ttsleep [n_eats_each]\n"
+# define ARGS_KO 	"Invalid Arguments\n"
+# define PRINTER 	"\033[1;30m%ld ms \033[1;31m%d %s\n"
+# define FORK_TAKEN "\033[1;33mhas taken a fork"
+# define EATING 	"\033[1;32mis eating"
+# define SLEEPING 	"\033[1;34mis sleeping"
+# define THINKING 	"\033[1;36mis thinking"
+# define DIED		"\033[1;31mdied"
 
+/*___OTHERS___*/
 # define MALLOC_KO 		0
 # define MUTEX_OK 		1
 # define TRUE			1
@@ -26,6 +42,7 @@
 # define LOCKED			0
 # define UNLOCKED		1
 
+/*___STRUCTURE_FOR_EACH_PHILO___*/
 typedef struct s_philo
 {
 	int				id;
@@ -40,7 +57,7 @@ typedef struct s_philo
 	struct s_cosas	*c;
 }	t_philo;
 
-/*__STRUCT_STORE_NUMBERS__*/
+/*___MAIN_STRUCTURE___*/
 typedef struct s_cosas {
 	char			**argv;
 	int				argc;
@@ -62,9 +79,9 @@ void			eat(t_philo *phils);
 void			leave_fork(t_philo *phils);
 
 /*___INIT_DATA___*/
-int				mutex(t_cosas *c);
-int				thread(t_cosas *c, int i);
-int				philosophers(t_cosas *c);
+int				init_mutex(t_cosas *c);
+int				init_thread(t_cosas *c, int i);
+int				init_philosophers(t_cosas *c);
 
 /*___MAIN_LOOPS___*/
 void			*death_checker(void *phils);
@@ -72,8 +89,13 @@ void			*meals_checker(void *phils);
 void			*dinner(void *phils);
 
 /*___PARSER___*/
-int				valid_range(t_cosas *c);
-int				init_args(t_cosas *c);
+int				valid_range(char **argv);
+int				init_args(t_cosas *c, int argc, char **argv);
+void			print_one(long time);
+
+/*___TIME___*/
+long			get_time(void);
+long			ft_usleep(long wait);
 
 /*___TIMEVAL___*/
 long			get_time(void);
@@ -84,6 +106,7 @@ long			time_dif(struct timeval time_usec);
 /*__UTILS__*/
 long			ft_atoi_long(const char *str);
 int				ft_isdigit(int c);
+int				ft_str_is_digit(char *str);
 int				ft_strlen(char *str);
 int				print_game(t_philo *phils, char *str, int lock);
 

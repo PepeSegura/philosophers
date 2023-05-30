@@ -6,32 +6,24 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:49:14 by psegura-          #+#    #+#             */
-/*   Updated: 2023/02/18 06:14:34 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:01:12 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-long	get_time(void)
-{
-	struct timeval	tp;
-
-	gettimeofday(&tp, NULL);
-	return ((tp.tv_sec * 1000) + (tp.tv_usec / 1000));
-}
 
 struct timeval	time_sum(struct timeval time_sec, long time_usec)
 {
 	struct timeval	time_out;
 
 	time_out.tv_usec = time_sec.tv_usec + time_usec;
-	if (time_out.tv_usec < 1000000)
+	// if (time_out.tv_usec < 1000000)
 		time_out.tv_sec = time_sec.tv_sec;
-	else
-	{
-		time_out.tv_sec = time_sec.tv_sec + 1;
-		time_out.tv_usec = time_out.tv_usec - 1000000;
-	}
+	// else
+	// {
+	// 	time_out.tv_sec = time_sec.tv_sec + 1;
+	// 	time_out.tv_usec = time_out.tv_usec - 1000000;
+	// }
 	return (time_out);
 }
 

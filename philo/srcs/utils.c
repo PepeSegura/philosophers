@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:02:02 by psegura-          #+#    #+#             */
-/*   Updated: 2023/02/18 06:21:26 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/03/20 22:29:06 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,20 @@ int	ft_isdigit(int c)
 	return (c >= '0' && c <= '9');
 }
 
+int	ft_str_is_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	ft_strlen(char *str)
 {
 	int	i;
@@ -62,7 +76,7 @@ int	print_game(t_philo *phils, char *str, int lock)
 
 	pthread_mutex_lock(&phils->c->printing);
 	time_now = time_dif(phils->c->program_start_time);
-	printf("%ldms philo %d %s\n", time_now / 1000, phils->id, str);
+	printf(PRINTER, time_now / 1000, phils->id, str);
 	if (lock == UNLOCKED)
 		pthread_mutex_unlock(&phils->c->printing);
 	return (0);

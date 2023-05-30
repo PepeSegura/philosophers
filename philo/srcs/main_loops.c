@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:05:33 by psegura-          #+#    #+#             */
-/*   Updated: 2023/02/18 06:21:47 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:20:13 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ void	*death_checker(void *phils)
 			&& (timeval_to_useconds(philo->max_time_to_eat)
 				< timeval_to_useconds(time_checker)))
 		{
-			print_game(philo, "died", LOCKED);
+			print_game(philo, DIED, LOCKED);
 			pthread_mutex_unlock(&philo->c->death);
-			return (NULL);
+			return ((void *) 0);
 		}
 		usleep(1000);
 	}
+	return ((void *) 1);
 }
 
 void	*meals_checker(void *phils)
@@ -51,13 +52,13 @@ void	*meals_checker(void *phils)
 		}
 		if (i == c->philo_c)
 		{
-			print_game(&c->philos[i - 1], "has eaten, closing game", LOCKED);
+			// print_game(&c->philos[i - 1], FINAL_MEAL, LOCKED);
 			pthread_mutex_unlock(&c->death);
 			break ;
 		}
 		usleep(1000);
 	}
-	return (0);
+	return (NULL);
 }
 
 void	*dinner(void *phils)
@@ -78,5 +79,5 @@ void	*dinner(void *phils)
 		eat(philo);
 		leave_fork(philo);
 	}
-	return (0);
+	return (NULL);
 }
