@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:05:33 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/23 22:44:59 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 00:40:27 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void	*death_checker(void *phils)
 	while (TRUE)
 	{
 		gettimeofday(&time_checker, NULL);
-		pthread_mutex_lock(&(philo->c->printing));
-		if (philo->is_eating == 0 && (timeval_to_useconds(philo->max_time_to_eat)
-				< timeval_to_useconds(time_checker)))
+		// pthread_mutex_lock(&(philo->c->printing));
+		if (philo->is_eating == 0 && timeval_to_useconds(philo->max_time_to_eat)
+				< timeval_to_useconds(time_checker))
 		{
-			pthread_mutex_unlock(&(philo->c->printing));
+			// pthread_mutex_unlock(&(philo->c->printing));
 			print_game(philo, DIED, LOCKED);
 			pthread_mutex_unlock(&(philo->c->death));
 			return ((void *) 0);
 		}
-		pthread_mutex_unlock(&(philo->c->printing));
+		// pthread_mutex_unlock(&(philo->c->printing));
 		ft_usleep(1000);
 	}
 	return ((void *) 1);
@@ -38,10 +38,10 @@ void	*death_checker(void *phils)
 
 void	*meals_checker(void *phils)
 {
-	t_cosas	*c;
+	t_data	*c;
 	int		i;
 
-	c = (t_cosas *)phils;
+	c = (t_data *)phils;
 	while (TRUE)
 	{
 		i = 0;
@@ -58,7 +58,7 @@ void	*meals_checker(void *phils)
 			pthread_mutex_unlock(&c->death);
 			break ;
 		}
-		usleep(1000);
+		ft_usleep(1);
 	}
 	return (NULL);
 }

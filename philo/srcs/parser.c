@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:13:08 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/23 22:42:01 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 00:39:52 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	valid_range(char **argv)
 	return (1);
 }
 
-int	init_args(t_cosas *c, int argc, char **argv)
+int	init_args(t_data *c, int argc, char **argv)
 {
 	if (argc < 5 || argc > 6)
 		return (0);

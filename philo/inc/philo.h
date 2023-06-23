@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:18:26 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/23 23:19:03 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 00:39:52 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,14 @@ typedef struct s_philo {
 	int				r_fork;
 	struct timeval	last_meal;
 	struct timeval	max_time_to_eat;
-	int				time_since_eat;
 	int				is_eating;
 	int				eat_count;
 	pthread_t		thread_id;
-	struct s_cosas	*c;
+	struct s_data	*c;
 }	t_philo;
 
 /*___MAIN_STRUCTURE___*/
-typedef struct s_cosas {
+typedef struct s_data {
 	char			**argv;
 	int				argc;
 	pthread_mutex_t	*forks;
@@ -72,7 +71,7 @@ typedef struct s_cosas {
 	struct timeval	program_start_time;
 	long			args[5];
 	t_philo			*philos;
-}	t_cosas;
+}	t_data;
 
 /*___ACTIONS___*/
 void			get_fork(t_philo *phils);
@@ -80,9 +79,9 @@ void			eat(t_philo *phils);
 void			leave_fork(t_philo *phils);
 
 /*___INIT_DATA___*/
-int				init_mutex(t_cosas *c);
-int				init_thread(t_cosas *c, int i);
-int				init_philosophers(t_cosas *c);
+int				init_mutex(t_data *c);
+int				init_thread(t_data *c, int i);
+int				init_philosophers(t_data *c);
 
 /*___MAIN_LOOPS___*/
 void			*death_checker(void *phils);
@@ -91,7 +90,7 @@ void			*dinner(void *phils);
 
 /*___PARSER___*/
 int				valid_range(char **argv);
-int				init_args(t_cosas *c, int argc, char **argv);
+int				init_args(t_data *c, int argc, char **argv);
 void			print_one(long time);
 
 /*___TIME___*/

@@ -6,13 +6,13 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:07:10 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/23 23:19:27 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 00:39:52 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_mutex(t_cosas *c)
+int	init_mutex(t_data *c)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ int	init_mutex(t_cosas *c)
 	return (MUTEX_OK);
 }
 
-int	init_philosophers(t_cosas *c)
+int	init_philosophers(t_data *c)
 {
 	int			i;
 	pthread_t	meals_check;
@@ -61,7 +61,7 @@ int	init_philosophers(t_cosas *c)
 	return (0);
 }
 
-int	init_thread(t_cosas *phils, int i)
+int	init_thread(t_data *phils, int i)
 {
 	void		*phi;
 

@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:36:27 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/23 23:18:36 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 00:07:57 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ void	get_fork(t_philo *phils)
 
 void	eat(t_philo *phils)
 {
-	pthread_mutex_lock(&phils->c->printing);
+	// pthread_mutex_lock(&phils->c->printing);
 	phils->is_eating = 1;
-	pthread_mutex_unlock(&phils->c->printing);
+	// pthread_mutex_unlock(&phils->c->printing);
 	print_game(phils, EATING, UNLOCKED);
 	gettimeofday(&phils->last_meal, NULL);
 	phils->max_time_to_eat = time_sum(phils->last_meal,
 			phils->c->args[TTDIE] * 1000);
 	phils->eat_count++;
 	ft_usleep(phils->c->args[TTEAT]);
-	pthread_mutex_lock(&phils->c->printing);
+	// pthread_mutex_lock(&phils->c->printing);
 	phils->is_eating = 0;
-	pthread_mutex_unlock(&phils->c->printing);
+	// pthread_mutex_unlock(&phils->c->printing);
 }
 
 void	leave_fork(t_philo *phils)
