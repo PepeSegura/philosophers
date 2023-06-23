@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:36:27 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/23 22:40:54 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/23 23:18:36 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	eat(t_philo *phils)
 	print_game(phils, EATING, UNLOCKED);
 	gettimeofday(&phils->last_meal, NULL);
 	phils->max_time_to_eat = time_sum(phils->last_meal,
-			phils->c->ttdie * 1000);
+			phils->c->args[TTDIE] * 1000);
 	phils->eat_count++;
-	ft_usleep(phils->c->tteat);
+	ft_usleep(phils->c->args[TTEAT]);
 	pthread_mutex_lock(&phils->c->printing);
 	phils->is_eating = 0;
 	pthread_mutex_unlock(&phils->c->printing);

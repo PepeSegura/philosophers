@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:07:10 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/23 22:37:33 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/23 23:19:27 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	init_philosophers(t_cosas *c)
 		init_thread(c, i);
 		i++;
 	}
-	if (c->meals > 0)
+	if (c->args[MEALS_C] > 0)
 	{
 		pthread_create(&meals_check, NULL, &meals_checker, (void *)c);
 		pthread_detach(meals_check);

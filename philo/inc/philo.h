@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:18:26 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/23 22:31:42 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/23 23:19:03 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@
 # define MEALS_C	4
 
 /*___STRUCTURE_FOR_EACH_PHILO___*/
-typedef struct s_philo
-{
+typedef struct s_philo {
 	int				id;
 	int				l_fork;
 	int				r_fork;
@@ -68,16 +67,10 @@ typedef struct s_cosas {
 	char			**argv;
 	int				argc;
 	pthread_mutex_t	*forks;
-	// pthread_mutex_t	*eating;
 	pthread_mutex_t	printing;
 	pthread_mutex_t	death;
 	struct timeval	program_start_time;
 	long			args[5];
-	long			philo_c;
-	long			ttdie;
-	long			tteat;
-	long			ttsleep;
-	long			meals;
 	t_philo			*philos;
 }	t_cosas;
 
