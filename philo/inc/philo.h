@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:18:26 by psegura-          #+#    #+#             */
-/*   Updated: 2023/05/30 19:06:35 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:31:42 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@
 # define LOCKED			0
 # define UNLOCKED		1
 
+# define PHILO_C	0
+# define TTDIE		1
+# define TTEAT		2
+# define TTSLEEP	3
+# define MEALS_C	4
+
 /*___STRUCTURE_FOR_EACH_PHILO___*/
 typedef struct s_philo
 {
@@ -62,9 +68,11 @@ typedef struct s_cosas {
 	char			**argv;
 	int				argc;
 	pthread_mutex_t	*forks;
+	// pthread_mutex_t	*eating;
 	pthread_mutex_t	printing;
 	pthread_mutex_t	death;
 	struct timeval	program_start_time;
+	long			args[5];
 	long			philo_c;
 	long			ttdie;
 	long			tteat;

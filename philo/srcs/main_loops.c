@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:05:33 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/01 16:39:51 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:44:59 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@ void	*death_checker(void *phils)
 	while (TRUE)
 	{
 		gettimeofday(&time_checker, NULL);
+		pthread_mutex_lock(&(philo->c->printing));
 		if (philo->is_eating == 0 && (timeval_to_useconds(philo->max_time_to_eat)
 				< timeval_to_useconds(time_checker)))
 		{
+			pthread_mutex_unlock(&(philo->c->printing));
 			print_game(philo, DIED, LOCKED);
-			pthread_mutex_unlock(&philo->c->death);
+			pthread_mutex_unlock(&(philo->c->death));
 			return ((void *) 0);
 		}
+		pthread_mutex_unlock(&(philo->c->printing));
 		ft_usleep(1000);
 	}
 	return ((void *) 1);
@@ -42,16 +45,16 @@ void	*meals_checker(void *phils)
 	while (TRUE)
 	{
 		i = 0;
-		while (i < c->philo_c)
+		while (i < c->args[PHILO_C])
 		{
-			if (c->philos[i].eat_count >= c->meals)
+			if (c->philos[i].eat_count >= c->args[MEALS_C])
 				i++;
 			else
 				break ;
 		}
-		if (i == c->philo_c)
+		if (i == c->args[PHILO_C])
 		{
-			// print_game(&c->philos[i - 1], FINAL_MEAL, LOCKED);
+
 			pthread_mutex_unlock(&c->death);
 			break ;
 		}
@@ -67,7 +70,7 @@ void	*dinner(void *phils)
 
 	philo = (t_philo *)phils;
 	philo->last_meal = philo->c->program_start_time;
-	philo->max_time_to_eat = time_sum(philo->last_meal, philo->c->ttdie * 1000);
+	philo->max_time_to_eat = time_sum(philo->last_meal, philo->c->args[TTDIE] * 1000);
 	pthread_create(&th_death_checker, NULL, &death_checker, phils);
 	pthread_detach(th_death_checker);
 	if (philo->id % 2 == 0)

@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:13:08 by psegura-          #+#    #+#             */
-/*   Updated: 2023/05/30 14:23:51 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:42:01 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ int	init_args(t_cosas *c, int argc, char **argv)
 		return (0);
 	if (valid_range(argv) == 1)
 	{
-		c->philo_c = ft_atoi_long(argv[1]);
-		c->ttdie = ft_atoi_long(argv[2]);
-		c->tteat = ft_atoi_long(argv[3]);
-		c->ttsleep = ft_atoi_long(argv[4]);
+		c->args[PHILO_C] = ft_atoi_long(argv[1]);
+		c->args[TTDIE] = ft_atoi_long(argv[2]);
+		c->args[TTEAT] = ft_atoi_long(argv[3]);
+		c->args[TTSLEEP] = ft_atoi_long(argv[4]);
 		if (argc == 6)
-			c->meals = ft_atoi_long(argv[5]);
+			c->args[MEALS_C] = ft_atoi_long(argv[5]);
 		else
-			c->meals = -1;
-		if (c->philo_c < 1 || c->ttdie < 1
-			|| c->tteat < 1 || c->ttsleep < 1 || c->meals < -1 || c->meals == 0)
+			c->args[MEALS_C] = -1;
+		if (c->args[PHILO_C] < 1 || c->args[TTDIE] < 1
+			|| c->args[TTEAT] < 1 || c->args[TTSLEEP] < 1 || c->args[MEALS_C] < -1 || c->args[MEALS_C] == 0)
 			return (0);
 		gettimeofday(&c->program_start_time, NULL);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:07:10 by psegura-          #+#    #+#             */
-/*   Updated: 2023/05/26 19:10:45 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:37:33 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ int	init_mutex(t_cosas *c)
 
 	pthread_mutex_init(&c->printing, NULL);
 	pthread_mutex_init(&c->death, NULL);
-	c->forks = malloc(sizeof(pthread_mutex_t) * c->philo_c);
+	// c->eating = malloc(sizeof(pthread_mutex_t) * c->philo_c); 
+	c->forks = malloc(sizeof(pthread_mutex_t) * c->args[PHILO_C]);
 	if (!c->forks)
 		return (MALLOC_KO);
 	pthread_mutex_lock(&c->death);
 	i = 0;
-	while (i <= c->philo_c)
+	while (i <= c->args[PHILO_C])
 	{
 		pthread_mutex_init(&c->forks[i], NULL);
+		// pthread_mutex_init(&c->eating[i], NULL);
 		i++;
 	}
 	return (MUTEX_OK);
@@ -36,15 +38,15 @@ int	init_philosophers(t_cosas *c)
 	int			i;
 	pthread_t	meals_check;
 
-	c->philos = malloc(sizeof(t_philo) * c->philo_c);
+	c->philos = malloc(sizeof(t_philo) * c->args[PHILO_C]);
 	if (!c->philos)
 		return (MALLOC_KO);
 	i = 0;
-	while (i < c->philo_c)
+	while (i < c->args[PHILO_C])
 	{
 		c->philos[i].id = i + 1;
-		c->philos[i].l_fork = (i + 2) % c->philo_c;
-		c->philos[i].r_fork = (i + 1) % c->philo_c;
+		c->philos[i].l_fork = (i + 2) % c->args[PHILO_C];
+		c->philos[i].r_fork = (i + 1) % c->args[PHILO_C];
 		printf("ID:[%d], LEFT: [%d] RIGHT:[%d]\n", c->philos[i].id, c->philos[i].l_fork, c->philos[i].r_fork);
 		gettimeofday(&(c->philos[i].last_meal), NULL);
 		c->philos[i].c = c;
