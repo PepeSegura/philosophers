@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:07:10 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/24 00:39:52 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 01:10:38 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	init_mutex(t_data *c)
 	pthread_mutex_init(&c->printing, NULL);
 	pthread_mutex_init(&c->death, NULL);
 	// c->eating = malloc(sizeof(pthread_mutex_t) * c->philo_c); 
-	c->forks = malloc(sizeof(pthread_mutex_t) * c->args[PHILO_C]);
+	c->forks = malloc(c->args[PHILO_C] * sizeof(pthread_mutex_t));
 	if (!c->forks)
 		return (MALLOC_KO);
 	pthread_mutex_lock(&c->death);
@@ -38,7 +38,7 @@ int	init_philosophers(t_data *c)
 	int			i;
 	pthread_t	meals_check;
 
-	c->philos = malloc(sizeof(t_philo) * c->args[PHILO_C]);
+	c->philos = malloc(c->args[PHILO_C] * sizeof(t_philo));
 	if (!c->philos)
 		return (MALLOC_KO);
 	i = 0;
