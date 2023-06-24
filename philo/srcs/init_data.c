@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:07:10 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/24 03:21:28 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 16:58:29 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	init_philosophers(t_data *c)
 		c->philos[i].id = i + 1;
 		c->philos[i].l_fork = (i + 2) % c->args[PHILO_C];
 		c->philos[i].r_fork = (i + 1) % c->args[PHILO_C];
-		printf("ID:[%d], LEFT: [%d] RIGHT:[%d]\n", c->philos[i].id,
+		dprintf(2, "ID:[%d], LEFT: [%d] RIGHT:[%d]\n", c->philos[i].id,
 				c->philos[i].l_fork, c->philos[i].r_fork);
-		gettimeofday(&(c->philos[i].last_meal), NULL);
+		c->philos[i].last_meal = get_time();
 		c->philos[i].c = c;
 		init_philo_thread(c, i);
 		i++;

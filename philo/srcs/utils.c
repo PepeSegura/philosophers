@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:02:02 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/24 02:20:14 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:17:10 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,8 @@ int	ft_strlen(char *str)
 
 int	print_game(t_philo *phils, char *str, int lock)
 {
-	long	time_now;
-
 	pthread_mutex_lock(&phils->c->printing);
-	time_now = time_dif(phils->c->program_start_time);
-	printf(PRINTER, time_now / 1000, phils->id, str);
+	printf(PRINTER, time_dif(phils->c->program_start_time), phils->id, str);
 	if (lock == UNLOCKED)
 		pthread_mutex_unlock(&phils->c->printing);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:13:08 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/24 03:19:57 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:17:00 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	init_args(t_data *c, int argc, char **argv)
 			|| c->args[TTSLEEP] < 1 || c->args[MEALS_C] < -1
 			|| c->args[MEALS_C] == 0)
 			return (0);
-		gettimeofday(&c->program_start_time, NULL);
+		c->program_start_time = get_time();
 		return (1);
 	}
 	return (0);
