@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:18:26 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/24 00:39:52 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 03:19:41 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define TTSLEEP	3
 # define MEALS_C	4
 
+typedef struct s_data	t_data;
+
 /*___STRUCTURE_FOR_EACH_PHILO___*/
 typedef struct s_philo {
 	int				id;
@@ -55,10 +57,11 @@ typedef struct s_philo {
 	int				r_fork;
 	struct timeval	last_meal;
 	struct timeval	max_time_to_eat;
+	int				time_since_eat;
 	int				is_eating;
 	int				eat_count;
 	pthread_t		thread_id;
-	struct s_data	*c;
+	t_data			*c;
 }	t_philo;
 
 /*___MAIN_STRUCTURE___*/
@@ -80,7 +83,7 @@ void			leave_fork(t_philo *phils);
 
 /*___INIT_DATA___*/
 int				init_mutex(t_data *c);
-int				init_thread(t_data *c, int i);
+int				init_philo_thread(t_data *c, int i);
 int				init_philosophers(t_data *c);
 
 /*___MAIN_LOOPS___*/
