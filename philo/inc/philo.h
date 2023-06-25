@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:18:26 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/24 03:19:41 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:54:15 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <limits.h>
-# include "philo.h"
 
 /*___TEXTS_TO_PRINT___*/
-# define USAGE 	"USAGE:\n\t./philo n_philos ttdie tteat ttsleep [n_eats_each]\n"
 # define ARGS_KO 	"Invalid Arguments\n"
 # define PRINTER 	"\033[1;30m%ld ms \033[1;31m%d %s\n"
 # define FORK_TAKEN "\033[1;33mhas taken a fork"
@@ -52,16 +50,16 @@ typedef struct s_data	t_data;
 
 /*___STRUCTURE_FOR_EACH_PHILO___*/
 typedef struct s_philo {
-	int				id;
-	int				l_fork;
-	int				r_fork;
-	struct timeval	last_meal;
-	struct timeval	max_time_to_eat;
-	int				time_since_eat;
-	int				is_eating;
-	int				eat_count;
-	pthread_t		thread_id;
-	t_data			*c;
+	int			id;
+	int			l_fork;
+	int			r_fork;
+	long		last_meal;
+	long		max_time_to_eat;
+	int			time_since_eat;
+	int			is_eating;
+	int			eat_count;
+	pthread_t	thread_id;
+	t_data		*c;
 }	t_philo;
 
 /*___MAIN_STRUCTURE___*/
@@ -71,7 +69,7 @@ typedef struct s_data {
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	printing;
 	pthread_mutex_t	death;
-	struct timeval	program_start_time;
+	long			program_start_time;
 	long			args[5];
 	t_philo			*philos;
 }	t_data;
@@ -86,7 +84,7 @@ int				init_mutex(t_data *c);
 int				init_philo_thread(t_data *c, int i);
 int				init_philosophers(t_data *c);
 
-/*___MAIN_LOOPS___*/
+/*___ROUTINES___*/
 void			*death_checker(void *phils);
 void			*meals_checker(void *phils);
 void			*dinner(void *phils);
@@ -99,12 +97,8 @@ void			print_one(long time);
 /*___TIME___*/
 long			get_time(void);
 long			ft_usleep(long wait);
-
-/*___TIMEVAL___*/
-long			get_time(void);
-struct timeval	time_sum(struct timeval time_sec, long time_usec);
-long			timeval_to_useconds(struct timeval time_sec);
-long			time_dif(struct timeval time_usec);
+long			time_sum(long start, long delay);
+long			time_dif(long old_time);
 
 /*__UTILS__*/
 long			ft_atoi_long(const char *str);

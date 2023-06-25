@@ -6,11 +6,21 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:07:02 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/23 22:43:34 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 15:06:59 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+long	time_sum(long start, long delay)
+{
+	return (start + delay);
+}
+
+long	time_dif(long old_time)
+{
+	return (get_time() - old_time);
+}
 
 long	get_time(void)
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_loops.c                                       :+:      :+:    :+:   */
+/*   routines.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:05:33 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/24 03:20:40 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:29:52 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,18 @@
 void	*death_checker(void *phils)
 {
 	t_philo			*philo;
-	struct timeval	time_checker;
+	long			actual_time;
 
 	philo = (t_philo *)phils;
 	while (TRUE)
 	{
-		gettimeofday(&time_checker, NULL);
-		pthread_mutex_lock(&(philo->c->printing));
-		if (philo->is_eating == 0
-			&& (timeval_to_useconds(philo->max_time_to_eat)
-				< timeval_to_useconds(time_checker)))
+		actual_time = get_time();
+		if (philo->is_eating == 0 && (philo->max_time_to_eat < actual_time))
 		{
-			pthread_mutex_unlock(&(philo->c->printing));
 			print_game(philo, DIED, LOCKED);
 			pthread_mutex_unlock(&(philo->c->death));
 			return ((void *)0);
 		}
-		pthread_mutex_unlock(&(philo->c->printing));
 		ft_usleep(1);
 	}
 	return ((void *)1);
@@ -41,6 +36,7 @@ void	*meals_checker(void *phils)
 {
 	t_data	*c;
 	int		i;
+	// int		max ;
 
 	c = (t_data *)phils;
 	while (TRUE)
@@ -48,10 +44,10 @@ void	*meals_checker(void *phils)
 		i = 0;
 		while (i < c->args[PHILO_C])
 		{
-			if (c->philos[i].eat_count >= c->args[MEALS_C])
-				i++;
-			else
+			dprintf(2, "PHILO[%d] MEALS[%d]\n", i, c->philos[i].eat_count);
+			if (c->philos[i].eat_count < c->args[MEALS_C])
 				break ;
+			i++;
 		}
 		if (i == c->args[PHILO_C])
 		{
@@ -70,12 +66,11 @@ void	*dinner(void *phils)
 
 	philo = (t_philo *)phils;
 	philo->last_meal = philo->c->program_start_time;
-	philo->max_time_to_eat = time_sum(philo->last_meal, philo->c->args[TTDIE]
-			* 1000);
+	philo->max_time_to_eat = time_sum(philo->last_meal, philo->c->args[TTDIE]);
 	pthread_create(&th_death_checker, NULL, &death_checker, phils);
 	pthread_detach(th_death_checker);
 	if (philo->id % 2 == 0)
-		usleep(550);
+		usleep(500);
 	while (TRUE)
 	{
 		get_fork(philo);
