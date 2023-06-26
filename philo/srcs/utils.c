@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:02:02 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/26 12:37:17 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:07:31 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	print_game(t_philo *phils, char *str, int lock)
 	if (is_dead(phils) == FALSE)
 		printf(PRINTER, time_dif(phils->c->program_start_time), phils->id, str);
 	else
-		printf(PRINTER, time_dif(phils->c->program_start_time), phils->id, DIED);
+		printf(PRINTER, time_dif(phils->c->program_start_time), phils->id, str);
 	if (lock == UNLOCKED)
 		pthread_mutex_unlock(&phils->c->printing);
 	return (0);

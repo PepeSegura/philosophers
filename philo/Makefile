@@ -6,7 +6,7 @@
 #    By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/05 12:09:16 by psegura-          #+#    #+#              #
-#    Updated: 2023/06/26 12:42:52 by psegura-         ###   ########.fr        #
+#    Updated: 2023/06/26 16:09:30 by psegura-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS =						\
 OBJS = $(SRCS:%.c=objs/%.o)
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=thread
 CFLAGS += -I inc
 LDFLAGS = -lpthread
 

@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:05:33 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/26 13:23:11 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:00:43 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ void	*death_checker(void *phils)
 	{
 		if (is_dead(philo) == TRUE)
 		{
-			print_game(philo, DIED, LOCKED);
-			pthread_mutex_unlock(&(philo->c->death));
+			print_game(philo, DIED, UNLOCKED);
+			// pthread_mutex_lock(&philo->c->printing);
+			// pthread_mutex_unlock(&(philo->c->death));
 			return (NULL);
 		}
 		ft_usleep(1);
@@ -73,6 +74,7 @@ void	*meals_checker(void *phils)
 		}
 		if (i == c->args[PHILO_C])
 		{
+			pthread_mutex_lock(&c->printing);
 			printf("YA HEMOS COMIDO TODOS\n");
 			pthread_mutex_unlock(&c->death);
 			break ;
@@ -99,6 +101,8 @@ void	*dinner(void *phils)
 		get_fork(philo);
 		eat(philo);
 		leave_fork(philo);
+		printf("tamos vivos\n");
 	}
+	pthread_join(th_death_checker, NULL);
 	return (NULL);
 }
