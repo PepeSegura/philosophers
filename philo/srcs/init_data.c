@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:07:10 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/26 06:20:44 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/26 13:05:55 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	init_mutex(t_data *c)
 
 	pthread_mutex_init(&c->printing, NULL);
 	pthread_mutex_init(&c->death, NULL);
-	c->forks = malloc(sizeof(pthread_mutex_t) * c->args[PHILO_C]);
+	c->forks = malloc(sizeof(t_mutex) * c->args[PHILO_C]);
 	if (!c->forks)
 		return (MALLOC_KO);
 	pthread_mutex_lock(&c->death);

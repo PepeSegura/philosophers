@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:18:26 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/26 06:20:38 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/26 13:07:29 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define MEALS_C	4
 
 typedef struct s_data	t_data;
+typedef pthread_mutex_t	t_mutex;
 
 /*___STRUCTURE_FOR_EACH_PHILO___*/
 typedef struct s_philo {
@@ -57,7 +58,7 @@ typedef struct s_philo {
 	long		max_time_to_eat;
 	int			time_since_eat;
 	int			is_eating;
-	pthread_mutex_t eating_mutex;
+	t_mutex		eating_mutex;
 	int			eat_count;
 	pthread_t	thread_id;
 	t_data		*c;
@@ -65,14 +66,15 @@ typedef struct s_philo {
 
 /*___MAIN_STRUCTURE___*/
 typedef struct s_data {
-	char			**argv;
-	int				argc;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	printing;
-	pthread_mutex_t	death;
-	long			program_start_time;
-	long			args[5];
-	t_philo			*philos;
+	char		**argv;
+	int			argc;
+	t_mutex		*forks;
+	t_mutex		printing;
+	t_mutex		death;
+	long		program_start_time;
+	long		args[5];
+	int			finish;
+	t_philo		*philos;
 }	t_data;
 
 /*___ACTIONS___*/
@@ -106,6 +108,7 @@ long			ft_atoi_long(const char *str);
 int				ft_isdigit(int c);
 int				ft_str_is_digit(char *str);
 int				ft_strlen(char *str);
+int				is_dead(t_philo *philo);
 int				print_game(t_philo *phils, char *str, int lock);
 
 #endif
