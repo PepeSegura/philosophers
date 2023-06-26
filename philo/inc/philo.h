@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:18:26 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/24 14:54:15 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/26 06:20:38 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_philo {
 	long		max_time_to_eat;
 	int			time_since_eat;
 	int			is_eating;
+	pthread_mutex_t eating_mutex;
 	int			eat_count;
 	pthread_t	thread_id;
 	t_data		*c;

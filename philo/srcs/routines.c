@@ -6,37 +6,60 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:05:33 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/24 17:29:52 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/26 06:20:33 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+int	is_dead(t_philo *philo)
+{
+	int		is_eating;
+	long	limit_time;
+
+	pthread_mutex_lock(&(philo->eating_mutex));
+    is_eating = philo->is_eating;
+	limit_time = philo->max_time_to_eat;
+    pthread_mutex_unlock(&(philo->eating_mutex));
+	if (is_eating == 0 && (get_time() > limit_time))
+		return (TRUE);
+	return (FALSE);
+}
+
 void	*death_checker(void *phils)
 {
 	t_philo			*philo;
-	long			actual_time;
 
 	philo = (t_philo *)phils;
 	while (TRUE)
 	{
-		actual_time = get_time();
-		if (philo->is_eating == 0 && (philo->max_time_to_eat < actual_time))
+		if (is_dead(philo) == TRUE)
 		{
 			print_game(philo, DIED, LOCKED);
 			pthread_mutex_unlock(&(philo->c->death));
-			return ((void *)0);
+			return (NULL);
 		}
 		ft_usleep(1);
 	}
 	return ((void *)1);
 }
 
+int	had_all_meals(t_data *c, int i)
+{
+	int	meals_count;
+
+	pthread_mutex_lock(&(c->philos[i].eating_mutex));
+	meals_count = c->philos[i].eat_count;
+	pthread_mutex_unlock(&(c->philos[i].eating_mutex));
+	if (meals_count < c->args[MEALS_C])
+		return (FALSE);
+	return (TRUE);
+}
+
 void	*meals_checker(void *phils)
 {
 	t_data	*c;
 	int		i;
-	// int		max ;
 
 	c = (t_data *)phils;
 	while (TRUE)
@@ -44,13 +67,13 @@ void	*meals_checker(void *phils)
 		i = 0;
 		while (i < c->args[PHILO_C])
 		{
-			dprintf(2, "PHILO[%d] MEALS[%d]\n", i, c->philos[i].eat_count);
-			if (c->philos[i].eat_count < c->args[MEALS_C])
+			if (had_all_meals(c, i) == FALSE)
 				break ;
 			i++;
 		}
 		if (i == c->args[PHILO_C])
 		{
+			printf("YA HEMOS COMIDO TODOS\n");
 			pthread_mutex_unlock(&c->death);
 			break ;
 		}
