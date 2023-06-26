@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:05:33 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/26 22:00:43 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:29:12 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	*death_checker(void *phils)
 	{
 		if (is_dead(philo) == TRUE)
 		{
+			//TODO: cambiar a LOCKED, y cerrar bien todos los hilos.
 			print_game(philo, DIED, UNLOCKED);
 			// pthread_mutex_lock(&philo->c->printing);
 			// pthread_mutex_unlock(&(philo->c->death));
