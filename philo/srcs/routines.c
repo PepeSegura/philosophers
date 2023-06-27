@@ -6,18 +6,19 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:05:33 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/27 16:43:24 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:27:06 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*death_checker_aux(t_data *c, int i)
+void	*set_death_and_exit(t_data *c, int i, int print_dead)
 {
 	pthread_mutex_lock(&c->m_finish);
 	c->finish = TRUE;
 	pthread_mutex_unlock(&c->m_finish);
-	print_game(&c->philos[i], DIED, LOCKED);
+	if (print_dead)
+		print_game(&c->philos[i], DIED, LOCKED);
 	pthread_mutex_unlock(&c->death);
 	return (NULL);
 }
@@ -38,7 +39,7 @@ void	*death_checker(void *phils)
 			if (is_dead(&c->philos[i]) == FALSE)
 				i++;
 			else
-				return (death_checker_aux(c, i));
+				return (set_death_and_exit(c, i, PRINT));
 		}
 		if (i == c->args[PHILO_C])
 		{
@@ -65,13 +66,7 @@ void	*meals_checker(void *phils)
 			i++;
 		}
 		if (i == c->args[PHILO_C])
-		{
-			pthread_mutex_lock(&c->m_finish);
-			c->finish = TRUE;
-			pthread_mutex_unlock(&c->m_finish);
-			pthread_mutex_unlock(&c->death);
-			break ;
-		}
+			return (set_death_and_exit(c, i, NO_PRINT));
 		ft_usleep(1);
 	}
 	return (NULL);

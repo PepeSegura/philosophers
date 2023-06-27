@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:18:26 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/27 16:49:39 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:25:21 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 # define FALSE			0
 # define LOCKED			0
 # define UNLOCKED		1
+
+# define PRINT		1
+# define NO_PRINT	0
 
 # define PHILO_C	0
 # define TTDIE		1
