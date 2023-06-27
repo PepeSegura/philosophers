@@ -6,7 +6,7 @@
 #    By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/05 12:09:16 by psegura-          #+#    #+#              #
-#    Updated: 2023/06/26 22:27:34 by psegura-         ###   ########.fr        #
+#    Updated: 2023/06/27 14:00:22 by psegura-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS =						\
 		srcs/parser.c		\
 		srcs/time.c			\
 		srcs/utils.c		\
+		srcs/validations.c	\
 
 OBJS = $(SRCS:%.c=objs/%.o)
 

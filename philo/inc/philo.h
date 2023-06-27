@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:18:26 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/26 13:07:29 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:44:03 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,11 @@ long			ft_atoi_long(const char *str);
 int				ft_isdigit(int c);
 int				ft_str_is_digit(char *str);
 int				ft_strlen(char *str);
-int				is_dead(t_philo *philo);
 int				print_game(t_philo *phils, char *str, int lock);
+
+/*__VALIDATIONS__*/
+int				had_all_meals(t_data *c, int i);
+int				is_dead(t_philo *philo);
+int				finish(t_philo *philo);
 
 #endif

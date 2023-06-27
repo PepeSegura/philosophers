@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 02:07:10 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/26 16:20:54 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:57:54 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	init_mutex(t_data *c)
 int	init_philosophers(t_data *c)
 {
 	int			i;
-	pthread_t	meals_check;
 
 	c->philos = malloc(sizeof(t_philo) * c->args[PHILO_C]);
 	if (!c->philos)
@@ -50,11 +49,6 @@ int	init_philosophers(t_data *c)
 		pthread_mutex_init(&(c->philos[i].eating_mutex), NULL);
 		init_philo_thread(c, i);
 		i++;
-	}
-	if (c->args[MEALS_C] > 0)
-	{
-		pthread_create(&meals_check, NULL, &meals_checker, (void *)c);
-		pthread_detach(meals_check);
 	}
 	return (0);
 }
