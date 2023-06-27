@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:36:27 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/26 03:28:58 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:42:00 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	get_fork(t_philo *phils)
 void	eat(t_philo *phils)
 {
 	pthread_mutex_lock(&(phils->eating_mutex));
-    phils->is_eating = 1;
-    pthread_mutex_unlock(&(phils->eating_mutex));
+	phils->is_eating = 1;
+	pthread_mutex_unlock(&(phils->eating_mutex));
 	print_game(phils, EATING, UNLOCKED);
 	pthread_mutex_lock(&(phils->eating_mutex));
 	phils->last_meal = get_time();
