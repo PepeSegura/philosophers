@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:13:08 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/24 14:17:00 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:04:51 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	init_args(t_data *c, int argc, char **argv)
 		c->args[TTDIE] = ft_atoi_long(argv[2]);
 		c->args[TTEAT] = ft_atoi_long(argv[3]);
 		c->args[TTSLEEP] = ft_atoi_long(argv[4]);
+		c->finish = FALSE;
 		if (argc == 6)
 			c->args[MEALS_C] = ft_atoi_long(argv[5]);
 		else
