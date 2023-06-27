@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:18:26 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/27 16:46:06 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:49:39 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_philo {
 	int			r_fork;
 	long		last_meal;
 	long		max_time_to_eat;
-	int			time_since_eat;
 	int			is_eating;
 	t_mutex		eating_mutex;
 	int			eat_count;
