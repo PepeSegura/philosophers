@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 12:18:26 by psegura-          #+#    #+#             */
-/*   Updated: 2023/06/27 13:44:03 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:46:06 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_data {
 	char		**argv;
 	int			argc;
 	t_mutex		*forks;
+	t_mutex		m_finish;
 	t_mutex		printing;
 	t_mutex		death;
 	long		program_start_time;
@@ -84,6 +85,7 @@ void			leave_fork(t_philo *phils);
 
 /*___INIT_DATA___*/
 int				init_mutex(t_data *c);
+int				init_checkers(t_data *c);
 int				init_philo_thread(t_data *c, int i);
 int				init_philosophers(t_data *c);
 
